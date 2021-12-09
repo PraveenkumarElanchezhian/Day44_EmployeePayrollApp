@@ -1,27 +1,50 @@
 <!DocType html>
 <html lang="en">
     <head>
-        <meta chaset="UTF-8">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/form.css" rel="StyleSheet">
         <link rel="Shorcut icon" href="../assets/images/logo.png">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <link href="../css/Payrollform.css" rel="StyleSheet">
         <title>Employee Payroll Form</title>
-        <script  src="../js/payroll.js"></script>
+        <script  defer src="../js/payroll_form.js"></script>
+        <script defer src="../js/EmployeePayroll.js"></script>
         <style>
         </style>
+
+<!-- <script>
+    var slider = document.getElementById("salary");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+    
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+    }
+    </script> -->
 
     </head>
  <body> 
      <header class="header-content header"> 
          <div class ="logo-content">
-             <img src="../assets/images/logo.png" alt="icon">
+             <img alt="shortcut icon" src="../assets/images/logo.png">
              <div>
                  <span class ="emp-text">EMPLOYEE</span><br>
                  <span class="emp-text emp-payroll"> PAYROLL</span>
             </div>
         </div>
      </header>
+
      <div class="form-content">
+        <form class="form" action="#" onreset="resetForm()" onsubmit="save(event)">
+
+            <div class="form-head">Employee Payroll Form</div>
+            <div class="row-content">
+                <label for="name" class="label text">Name</label>
+                <input type="text" name="name" id="name" class="input" placeholder="Your Name ..." autocomplete="off" required>
+                <error-output class="text-error" for="text"></error-output>
+            </div>
+
+     <!-- <div class="form-content">
         <form class="form" action="#"
             onsubmit="save();return false">
             <div class="form-head">
@@ -32,7 +55,8 @@
                     for="name">Name</label>
                 <input class="input" type="text" id="name" name="name" placeholder="Your Name" required>
               
-             </div>
+             </div> -->
+
              <div class="row-content">
                 <label class="label text" for="profile">Profile image</label>   
                 <div class ="profile-radio-content">
@@ -55,7 +79,7 @@
              </div>
              </div>
              <div class="row-content">
-                 <label class="label text " for="gender">Gender </label>
+                 <label class="label text " for="gender">Gender</label>
                  <div>
                      <input type="radio" id="male" name="gender" value="male">
                      <label class="text" for="Male">Male</label>
@@ -79,9 +103,9 @@
                 </div>
             </div>
             <div class="row-content">
-                <label class="label text" for="salary"> Choose the salary:</label>
-                <input class="input" type="range" name="salary" min="300000" max="500000" step="100" value="400000">
-                <output class="salary-output text" for="salary">400000</output>
+                <label class="label text" for="salary">Choose the salary:</label>
+                <input class="input" type="range" name="salary" id="salary" min="300000" max="500000" step="500" value="400000" oninput="this.nextElementSibling.value = this.value">
+                <output class="salary-output text" id="demo" for="salary">400000</output>
                 </div>
             <div class="row-content">
                 <label class="label text" for="startDate">Start Date</label>
