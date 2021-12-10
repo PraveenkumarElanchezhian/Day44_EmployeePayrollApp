@@ -1,23 +1,17 @@
 class EmployeePayrollData {
 
-    get id() {
-        return this._id;
-    }
-
-    set id(id) {
-        this._id = id;
-    }
+    id;
 
     get name() {
         return this._name;
     }
 
     set name(name) {
-        let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$');
+        let nameRegex = RegExp('^[A-Z]{1}[a-zA-Z\\s]{2,}$');
         if (nameRegex.test(name))
             this._name = name;
         else
-            throw "NAME is Incorrect";
+            throw "Name is Incorrect";
     }
 
     get profileImage() {
@@ -58,12 +52,15 @@ class EmployeePayrollData {
     }
 
     set startDate(startDate) {
-        let difference = Date.now() - startDate;
-        difference = Math.ceil(difference / (1000 * 60 * 60 * 24));
-        if (difference > 30 || difference < 0) {
-          throw "Start Date is Invalid";
-        } else {
-          this._startDate = startDate;
+        var today = new Date();
+        if(today < startDate )
+            throw 'Start date is in the Future';
+        const minDate = new Date(today.setDate(today.getDate()-30));
+        today = new Date();
+        if(startDate < minDate)
+            throw 'Start date is Beyond 30 days';
+        else {
+            this._startDate = startDate;
         }
     }
 
@@ -75,10 +72,9 @@ class EmployeePayrollData {
         this._notes = notes;
     }
 
-
     toString() {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const employeeDate = this.startDate == undefined ? "undefined" : this.startDate.toLocaleDateString("en-us", options);
-        return "Id = " + this.id + ", Name = " + this.name + ", Profile Image = " + this.profileImage + ", Gender = " + this.gender + ", Department = " + this.department + ", Salary = " + this.salary + ", Start Date = " + employeeDate + ", Notes = " + this.notes;
-    } 
+        return "Id = " + this.id + "\nName = " + this.name + "\nProfile Image = " + this.profileImage + "\nGender = " + this.gender + "\nDepartment = " + this.department + "\nSalary = " + this.salary + "\nStart Date = " + employeeDate + "\nNotes = " + this.notes;
+    }
 }
